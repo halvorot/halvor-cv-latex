@@ -1,0 +1,31 @@
+name: Build and Commit LaTeX PDF
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: true   # Needed for committing
+
+    - name: Build LaTeX PDF
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: main.tex
+
+    - name: Rename PDF
+      run: mv main.pdf halvor-cv-pdf.pdf
+
+    - name: Commit PDF
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add halvor-cv-pdf.pdf
+        git commit -m "Update PDF [skip ci]" || echo "No changes to commit"
+        git push
