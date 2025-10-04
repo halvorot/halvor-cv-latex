@@ -20,10 +20,10 @@ jobs:
     - name: Build LaTeX PDF
       uses: xu-cheng/latex-action@v4
       with:
-        root_file: main.tex
+        root_file: english.tex
 
     - name: Rename PDF
-      run: mv main.pdf halvor-cv-pdf.pdf
+      run: mv english.pdf halvor-cv-pdf.pdf
 
     - name: Commit PDF
       run: |
