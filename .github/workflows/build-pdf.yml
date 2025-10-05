@@ -1,0 +1,49 @@
+name: Build and Commit LaTeX PDF
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'english.tex'
+      - 'norsk.tex'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+      with:
+        persist-credentials: true   # Needed for committing
+
+    - name: Build LaTeX PDF
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: english.tex
+    - name: Build LaTeX PDF
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: norsk.tex
+
+    - name: Rename PDF
+      run: |
+        mv english.pdf halvor-cv-english.pdf
+        mv norsk.pdf halvor-cv-norsk.pdf
+
+    - name: Install rclone
+      run: sudo apt-get install -y rclone
+
+    - name: Configure rclone
+      run: |
+        mkdir -p ~/.config/rclone
+        echo "${{ secrets.RCLONE_CONF }}" > ~/.config/rclone/rclone.conf
+
+    - name: Upload PDFs to Google Drive
+      run: |
+        rclone copy halvor-cv-english.pdf googledrive:/Jobb/CV/
+        rclone copy halvor-cv-norsk.pdf googledrive:/Jobb/CV/
+    

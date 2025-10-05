@@ -1,0 +1,42 @@
+% ModernCV setup
+\moderncvstyle{classic}     % options: casual, classic, banking, oldstyle, fancy
+\moderncvcolor{orange}      % base color (we will override with exact hex)
+
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math} 
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[norwegian]{babel}
+
+% Encoding and geometry
+\usepackage[utf8]{inputenc}
+\usepackage[scale=0.82]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[pdfpagelabels=false]{hyperref}
+\setlist[itemize]{noitemsep, topsep=0pt}
+
+% adjust the page margins
+\setlength{\hintscolumnwidth}{3cm} % Adjust hint column width (dates)
+%\setlength{\makecvheadnamewidth}{11cm}
+
+% Personal data
+\name{Halvor}{Ødegård Teigen}
+\title{Software Engineer}
+\homepage{halvorteigen.no}
+\social[linkedin]{halvor-teigen}
+\social[github]{halvorot}
+\photo[64pt][0pt]{halvor_portrett.jpg}
