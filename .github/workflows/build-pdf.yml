@@ -40,13 +40,10 @@ jobs:
         mv english.pdf halvor-cv-english.pdf
         mv norsk.pdf halvor-cv-norsk.pdf
 
-    - name: Install rclone
-      run: sudo apt-get install -y rclone
-
-    - name: Configure rclone
-      run: |
-        mkdir -p ~/.config/rclone
-        echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
+    - name: Setup Rclone
+      uses: AnimMouse/setup-rclone@v1
+      with:
+        rclone_config: ${{ secrets.RCLONE_CONFIG }}
 
     - name: Upload PDFs to Google Drive
       run: |
