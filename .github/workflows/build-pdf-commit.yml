@@ -7,7 +7,7 @@ on:
       - 'english.tex'
       - 'norsk.tex'
       - 'preamble.tex'
-      - 'build-pdf-commit.yml'
+      - '.github/workflows/build-pdf-commit.yml'
 
 permissions:
   contents: write

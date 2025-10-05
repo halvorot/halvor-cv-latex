@@ -7,7 +7,7 @@ on:
       - 'english.tex'
       - 'norsk.tex'
       - 'preamble.tex'
-      - 'build-pdf-google-drive.yml'
+      - '.github/workflows/build-pdf-google-drive.yml'
 
 jobs:
   build-and-upload-pdf-google-drive:
