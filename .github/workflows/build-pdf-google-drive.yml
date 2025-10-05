@@ -9,9 +9,6 @@ on:
       - 'preamble.tex'
       - 'build-pdf-google-drive.yml'
 
-permissions:
-  contents: write
-
 jobs:
   build-and-upload-pdf-google-drive:
     runs-on: ubuntu-latest
