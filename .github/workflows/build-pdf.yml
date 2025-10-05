@@ -6,6 +6,7 @@ on:
     paths:
       - 'english.tex'
       - 'norsk.tex'
+      - 'preamble.tex'
 
 permissions:
   contents: write
@@ -13,18 +14,25 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
       with:
         persist-credentials: true   # Needed for committing
 
-    - name: Build LaTeX PDF
+    - name: Create contact.tex from secrets
+      run: |
+        {
+          echo "\phone[mobile]{${{ secrets.PHONE_NUMBER }}}"
+          echo "\email{${{ secrets.EMAIL_ADDRESS }}}"
+        } > contact.tex
+
+    - name: Build english
       uses: xu-cheng/latex-action@v4
       with:
         root_file: english.tex
-    - name: Build LaTeX PDF
+
+    - name: Build norwegian
       uses: xu-cheng/latex-action@v4
       with:
         root_file: norsk.tex
@@ -46,4 +54,3 @@ jobs:
       run: |
         rclone copy halvor-cv-english.pdf googledrive:/Jobb/CV/
         rclone copy halvor-cv-norsk.pdf googledrive:/Jobb/CV/
-    
