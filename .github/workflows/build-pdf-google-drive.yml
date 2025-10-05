@@ -1,4 +1,4 @@
-name: Build and Commit LaTeX PDF
+name: Build and Upload LaTeX PDF to Google Drive
 
 on:
   push:
@@ -7,19 +7,17 @@ on:
       - 'english.tex'
       - 'norsk.tex'
       - 'preamble.tex'
-      - '.github/workflows/build-pdf.yml'
+      - 'build-pdf-google-drive.yml'
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  build-and-upload-pdf-google-drive:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v5
-      with:
-        persist-credentials: true   # Needed for committing
 
     - name: Create contact.tex from secrets
       run: |
