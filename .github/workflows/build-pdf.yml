@@ -27,17 +27,14 @@ jobs:
           echo "\email{${{ secrets.EMAIL_ADDRESS }}}"
         } > contact.tex
 
-    - name: Build english
+    - name: Build PDFs
       uses: xu-cheng/latex-action@v4
       with:
-        root_file: english.tex
+        root_file: |
+          english.tex
+          norsk.tex
 
-    - name: Build norwegian
-      uses: xu-cheng/latex-action@v4
-      with:
-        root_file: norsk.tex
-
-    - name: Rename PDF
+    - name: Rename PDFs
       run: |
         mv english.pdf halvor-cv-english.pdf
         mv norsk.pdf halvor-cv-norsk.pdf
@@ -48,7 +45,7 @@ jobs:
     - name: Configure rclone
       run: |
         mkdir -p ~/.config/rclone
-        echo "${{ secrets.RCLONE_CONF }}" > ~/.config/rclone/rclone.conf
+        echo '${{ secrets.RCLONE_CONF }}' > ~/.config/rclone/rclone.conf
 
     - name: Upload PDFs to Google Drive
       run: |
