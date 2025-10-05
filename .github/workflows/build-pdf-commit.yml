@@ -1,4 +1,4 @@
-name: Build and Commit LaTeX PDF without contact info
+name: Build and Commit PDF without contact info
 
 on:
   push:

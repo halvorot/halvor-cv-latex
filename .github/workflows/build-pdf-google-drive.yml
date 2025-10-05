@@ -1,4 +1,4 @@
-name: Build and Upload LaTeX PDF to Google Drive
+name: Build and Upload PDF to Google Drive
 
 on:
   push:
